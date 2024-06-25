@@ -35,7 +35,7 @@ Develop user-friendly music player which has a song list to play different songs
 </div>
 <br>
 
-**Live Demo** : https://basanti2004.github.io/MusicPlayerProject/
+**Live Demo** :https://github.com/basanti2004/musicPlayerProject/
 
 
 ## Developer
