@@ -35,7 +35,6 @@ Develop user-friendly music player which has a song list to play different songs
 </div>
 <br>
 
-**Live Demo** :https://github.com/basanti2004/musicPlayerProject/
 
 
 ## Developer
@@ -43,6 +42,6 @@ Develop user-friendly music player which has a song list to play different songs
 👤 **Basanti Rathod**
 
 Youtube: [youtube](https://www.youtube.com/@basntirathod2004)
-Linkedin: [linkedin](https://www.linkedin.com/in/basanti-rathod/)
+Linkedin: [linkedin](www.linkedin.com/in/basanti-rathod-84229026a)
 Github: [@githubhandle](https://github.com/basanti2004)
 
