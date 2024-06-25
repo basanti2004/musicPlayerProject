@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/3bd6c4a176.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./screen-size.css">
+  <link rel="stylesheet" href="./hollywood-songs.html">
+  <title>Music Player</title>
+ 
+</head>
+<body>
+  
+
+
+
+  <nav>
+    <div class="nav-bar">
+      <span>
+        <h1> Music World</h1>
+      </span>
+      <div class="search-bar">
+        <form action="#" method="get" class="search-form">
+          <input type="text" placeholder="Search..." name="search" class="search-input">
+          <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
+        </form>
+      </div>
+    </div>
+  </nav> 
+
+  <div class="toggle-menu">
+    <button id="toggle-menu-btn"><i class="fa-solid fa-bars"></i></button>
+  </div>
+
+  <div class="container">
+    <div class="left">
+  <button id="close-left-sidebar" >
+    <i class="fas fa-times"></i> <!-- Font Awesome delete icon -->
+  </button>
+      <div class="btn">
+        <ul>
+          <li class="active"><i class="fa-solid fa-house"></i><a id="home-button">Home</a></li>
+          <li><i class="fa-solid fa-plus"></i><a href="./playlist.html">PlayList</a></li>
+        </ul>
+      </div>
+
+     
+      <div class="artists" id="now-playing">
+        <form id="downloadForm" >
+        <div class="song-details" id="musicPlayer">
+          <h2 id="current-title">Song Title</h2>
+          <img id="current-poster" src="" alt="Song Poster"><br>
+         <span>Singer </span><p id="current-singer"> Artist Name</p>
+          <audio id="audio-player" controls></audio>
+          <div class="controls">
+            <button id="prev-button"><i class="fa-solid fa-angle-left"></i></button>
+            <button id="play-pause-button" hidden><i class="fa-solid fa-play"></i></button>
+            <button id="next-button"><i class="fa-solid fa-angle-right" ></i></button>
+            <button type="button" id="download-button" onclick="sendDataToPlaylist()"><i class="fa-solid fa-download"></i></button>
+          </div>
+          <input type="range" id="progress-bar" value="0" max="100" hidden>
+        </div>
+        </form>
+      </div>
+    </div>
+   
+    
+    <div class="right">
+      <div class="popular-song">
+        <div class="title">
+          <h1> Popular Bollywood Songs</h1>
+          <h4 class="top"><a href="./bollywood-songs.html">View</a></h4>
+        </div>
+        <div class="song-list songs">
+          <div class="song-item"  data-audio="./audio/badtameez-dil.mp3" data-poster="./images/badtameez-dil.jpg" data-title="badtameez dil" data-singer="Benny Dayal">
+            <img src="./images/badtameez-dil.jpg" alt="Song 1 Poster">
+          
+            <h2>badtameez dil</h2>
+          </div>
+          <div class="song-item" data-audio="./audio/afreen-afreen.mp3" data-poster="./images/afreen-afreen.jpg" data-title="Afreen Afreen" data-singer="Nusrat Khan">
+            <img src="./images/afreen-afreen.jpg" alt="Song 2 Poster">
+     
+            <h2>Afreen Afreen</h2>
+          </div>
+          <div class="song-item" data-audio="./audio/chaleyan.mp3" data-poster="./images/chaleyan.jpg" data-title="Chaleyan" data-singer="Shreya Ghoshal">
+            <img src="./images/chaleyan.jpg" alt="Song 3 Poster">
+            <h2>Chaleyan</h2>
+          </div>
+          <div class="song-item" data-audio="./audio/dil-jhoom-jhoom.mp3" data-poster="./images/dil-jhoon-jhoom.jpg" data-title="Dil Jhoom Jhoom" data-singer="ArijitSingh">
+            <img src="./images/dil-jhoon-jhoom.jpg" alt="Song 4 Poster">
+            <h2>Dil Jhoom Jhoom</h2>
+          </div>
+
+          <div class="song-item " data-audio="./audio/heeriyen-heeriyen-aa.mp3" data-poster="./images/heeriyen-heeriyen-aa.jpg" data-title="Heeriyen Heeriyen aa" data-singer="Jasleen Royal & Arijit Singh" hidden>
+            <img src="./images/heeriyen-heeriyen-aa.jpg" alt="Song 5 Poster">
+            <h2>Heeriyen Heeriyen aa</h2>
+          </div>
+          <div class="song-item " data-audio="./audio/kasam-ki-kasam.mp3" data-poster="./images/Music.jpg" data-title="Kasam Ki Kasam" data-singer="A.R.Rahaman" hidden>
+            <img src="./images/music.jpg" alt="Song 6 Poster">
+            <h2>Kasam Ki Kasam</h2>
+          </div>
+          <div class="song-item " data-audio="./audio/main-nikla-gadi-leke.mp3" data-poster="./images/main-nikla-gadi-leke.jpg" data-title="Main Nikla Gadi Leke" data-singer="Aditya Narayan & Udit Narayan" hidden>
+            <img src="./images/main-nikla-gadi-leke.jpg" alt="Song 7 Poster">
+            <h2>Main Nikla Gadi Leke</h2>
+          </div>
+          <div class="song-item " data-audio="./audio/raatan-lambiyan.mp3" data-poster="./images/raatan-lambiyan.jpg" data-title="Raatan Lambiyan" data-singer="Asees kaur & Jubin Nautiyal" hidden>
+            <img src="./images/raatan-lambiyan.jpg" alt="Song 8 Poster">
+            <h2>Raatan Lambiyan</h2>
+          </div>
+          <div class="song-item " data-audio="./audio/what-zhumka.mp3" data-poster="./images/what-jhumka.jpg" data-title="Whay Jhumka" data-singer="Asha Bhosle" hidden>
+            <img src="./images/what-jhumka.jpg" alt="Song 9 Poster">
+            <h2>Whay Jhumka</h2>
+          </div>
+          <div class="song-item " data-audio="./audio/mana-ke-hum-yaar-nahi.mp3" data-poster="./images/mana-ke-hum-yaar-nahi.jpg" data-title="Mana ke Hum Yaar Nahi" data-singer="Parineeti Chopra" hidden>
+            <img src="./images/mana-ke-hum-yaar-nahi.jpg" alt="Song 10 Poster">
+            <h2>Mana ke Hum Yaar Nahi</h2>
+          </div>
+          <div class="song-item " data-audio="./audio/rait-zara-si.mp3" data-poster="./images/rait-zara-si.jpg" data-title="Rait Zara Si" data-singer="A.R.Rahaman" hidden>
+            <img src="./images/rait-zara-si.jpg" alt="Song 11 Poster">
+            <h2>Rait Zara Si</h2>
+          </div>
+          <div class="song-item " data-audio="./audio/satranga.mp3" data-poster="./images/satranga.jpg" data-title="Satranga" data-singer="Shreyas Puranik" hidden>
+            <img src="./images/satranga.jpg" alt="Song 13 Poster">
+            <h2>Satranga</h2>
+          </div>
+          <div class="song-item " data-audio="./audio/o-sajni-re.mp3" data-poster="./images/sajni.jpg" data-title="Sajni Re" data-singer="Arijit Singh" hidden>
+            <img src="./images/sajni.jpg" alt="Song 14 Poster">
+            <h2>Sajni Re</h2>
+          </div>
+          <div class="song-item " data-audio="./audio/chashni.mp3" data-poster="./images/chashni.jpg" data-title="Chashni" data-singer="Abhijeet Shrivastava" hidden>
+            <img src="./images/chashni.jpg" alt="Song 15 Poster">
+            <h2>Chashni</h2>
+          </div>
+          <div class="song-item " data-audio="./audio/akela-hai-khiladi.mp3" data-poster="./images/akela-hai-khiladi.jpg" data-title="Akela Hai Khiladi" data-singer="Anuradha Paudwal & Udit Narayan" hidden>
+            <img src="./images/akela-hai-khiladi.jpg" alt="Song 16 Poster">
+            <h2>Akela Hai Khiladi</h2>
+          </div>
+        </div>
+      </div>
+      
+      <div class="popular-song">
+        <div class="title">
+          <h1>Popular Hollywood Songs</h1>
+          <h4 class="bottom"><a href="./hollywood-songs.html">View</a></h4>
+        </div>
+        <div class="song-list songs">
+          <div class="song-item" data-singer="Mark Ronson" data-audio="./hollywood-audio/uptown-funk.mp3" data-poster="./hollywood-songs/uptown-funk.jpg" data-title="Uptown-Funk">
+            <img src="./hollywood-songs/uptown-funk.jpg" alt="song1">
+            <h2>uptown-funk</h2>
+          </div>
+          <div class="song-item" data-singer="Benson Boone" data-audio="./hollywood-audio/beautiful-things.mp3" data-poster="./hollywood-songs/beautiful-things.jpg" data-title="Beautiful Things">
+            <img src="./hollywood-songs/beautiful-things.jpg" alt="song 2">
+            <h2>Beautiful Things</h2>
+          </div>
+          <div class="song-item" data-singer="Kony Ala" data-audio="./hollywood-audio/blue-one-love.mp3" data-poster="./hollywood-songs/blue-one-love.jpg" data-title="Blue One love">
+            <img src="./hollywood-songs/blue-one-love.jpg" alt="song 3">
+            <h2>Blue One love</h2>
+          </div>
+          <div class="song-item" data-singer="Pitbull" data-audio="./hollywood-audio/fireball.mp3" data-poster="./hollywood-songs/fireball.jpg" data-title="fireball">
+            <img src="./hollywood-songs/fireball.jpg" alt="song 4">
+            <h2>fireball</h2>
+          </div>
+          <div class="song-item" data-singer="Rom Di Prisco" data-audio="./hollywood-audio/fortnite.mp3" data-poster="./hollywood-songs/fortnight.jpg" data-title="Fortnight" hidden>
+                    <img src="./hollywood-songs/fortnight.jpg" alt="song 5">
+                    <h2>Fortnite</h2>
+                  </div>
+                  <div class="song-item" data-singer="Artemas" data-audio="./hollywood-audio/i-like-the-way-you-kiss-me.mp3" data-poster="./hollywood-songs/i-like-the-way-you-kiss-me.jpg" data-title="I Like The Way You Kiss Me" hidden>
+                    <img src="./hollywood-songs/i-like-the-way-you-kiss-me.jpg" alt="song 6">
+                    <h2>I Like The Way You Kiss Me</h2>
+                  </div>
+                  <div class="song-item" data-singer="Camila Cabello" data-audio="./hollywood-audio/i-luv-it.mp3" data-poster="./hollywood-songs/i-luv-it.jpg" data-title="I Luv It" hidden>
+                    <img src="./hollywood-songs/i-luv-it.jpg" alt="song 7">
+                    <h2>I Luv It</h2>
+                  </div>
+                  <div class="song-item" data-singer="Justin Bieber" data-audio="./hollywood-audio/love-me.mp3" data-poster="./hollywood-songs/love-me.jpg" data-title="love Me" hidden>
+                    <img src="./hollywood-songs/love-me.jpg" alt="song 8">
+                    <h2>love Me</h2>
+                  </div>
+                  <div class="song-item" data-singer="Ed Sheeran" data-audio="./hollywood-audio/perfect.mp3" data-poster="./hollywood-songs/perfect.jpg" data-title="Perfect" hidden>
+                    <img src="./hollywood-songs/perfect.jpg" alt="song 9">
+                    <h2>Perfect</h2>
+                  </div>
+                  <div class="song-item" data-singer="FKJ & Masego" data-audio="./hollywood-audio/tadow.mp3" data-poster="./hollywood-songs/tadow.jpg" data-title="Tadow" hidden>
+                    <img src="./hollywood-songs/tadow.jpg" alt="song 10">
+                    <h2>Tadow</h2>
+                  </div>
+                  
+
+        </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+ 
+<script src="./script.js"></script>
+
+ 
+
+</body>
+</html>

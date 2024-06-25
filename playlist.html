@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/3bd6c4a176.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./screen-size.css">
+  <link rel="stylesheet" href="./playlist.css">
+  <title>Music Player</title>
+  <style>
+    .song-item.active {
+      transition: 0.3s ease;
+      padding: 10px; 
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-bar">
+      <span>
+        <h1>Music World</h1>
+      </span>
+      <div class="search-bar">
+        <form method="get" class="search-form">
+          <input type="text" placeholder="Search..." name="search" class="search-input" id="search-input">
+          <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
+        </form>
+      </div>
+    </div>
+  </nav> 
+
+  <div class="toggle-menu">
+    <button id="toggle-menu-btn"><i class="fa-solid fa-bars"></i></button>
+  </div>
+
+  <div class="container">
+    <div class="left">
+      <button id="close-left-sidebar"><i class="fas fa-times"></i></button>
+      <div class="btn">
+        <ul>
+          <li><i class="fa-solid fa-house"></i><a href="./index.html" id="home-button">Home</a></li>
+          <li class="active"><i class="fa-solid fa-plus"></i><a href="./playlist.html" onclick="saveCurrentSong()">PlayList</a></li>
+        </ul>
+      </div>
+      <div class="artists" id="now-playing">
+        <form id="downloadForm">
+          <div class="song-details" id="musicPlayer">
+            <h2 id="current-title">Song Title</h2>
+            <img id="current-poster" src="" alt="Song Poster"><br>
+            <span>Singer </span><p id="current-singer"> Artist Name</p>
+            <audio id="audio-player" controls></audio>
+            <div class="controls">
+              <button id="prev-button"><i class="fa-solid fa-angle-left"></i></button>
+              <button id="play-pause-button" hidden><i class="fa-solid fa-play"></i></button>
+              <button id="next-button"><i class="fa-solid fa-angle-right"></i></button>
+              <button type="button" id="download-button" onclick="sendDataToPlaylist()"><i class="fa-solid fa-download"></i></button>
+            </div>
+            <input type="range" id="progress-bar" value="0" max="100" hidden>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="popular-song bolly-songs">
+        <h1><i class="fa-solid fa-plus"></i> My Playlist</h1>
+        <div class="song-list list">
+          <ul id="playlist" class="playlist">
+            <!-- Saved songs will be displayed here -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="message-area"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('search-input');
+      const songItems = document.querySelectorAll('.song-item');
+
+      searchInput.addEventListener('input', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        songItems.forEach(function(songItem) {
+          const songTitle = songItem.getAttribute('data-title').toLowerCase();
+          const songSinger = songItem.getAttribute('data-singer').toLowerCase();
+          
+          if (songTitle.includes(searchTerm) || songSinger.includes(searchTerm)) {
+            songItem.style.display = 'block';
+          } else {
+            songItem.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    function renderPlaylist() {
+      var playlistElement = document.getElementById('playlist');
+      playlistElement.innerHTML = ''; // Clear existing list
+  
+      var savedSongs = JSON.parse(localStorage.getItem('savedSongs')) || [];
+      savedSongs.forEach(function(song, index) {
+        var li = document.createElement('li');
+        li.classList.add('song-item');
+        li.setAttribute('data-audio', song.audio);
+        li.setAttribute('data-poster', song.poster);
+        li.setAttribute('data-title', song.title);
+        li.setAttribute('data-singer', song.singer);
+  
+        li.innerHTML = `
+          <img src="${song.poster}" alt="Song Poster">
+          <h2 class="font">${song.title}</h2>
+          <button class="delete-button" data-index="${index}"><i class="fa-solid fa-trash-can-arrow-up"></i></button>
+        `;
+        playlistElement.appendChild(li);
+  
+        // Add click event to play song
+        li.addEventListener('click', function() {
+          currentSongIndex = index;
+          loadSong(currentSongIndex);
+        });
+  
+        // Add click event to delete song
+        li.querySelector('.delete-button').addEventListener('click', function(event) {
+          event.stopPropagation(); // Prevent triggering the play song event
+          var songIndex = this.getAttribute('data-index');
+          deleteSong(songIndex);
+        });
+      });
+    }
+  
+    function deleteSong(index) {
+      var savedSongs = JSON.parse(localStorage.getItem('savedSongs')) || [];
+      savedSongs.splice(index, 1);
+      localStorage.setItem('savedSongs', JSON.stringify(savedSongs));
+      renderPlaylist(); // Re-render the playlist
+    }
+
+    function saveCurrentSong() {
+      const currentSong = {
+        audio: document.getElementById('audio-player').src,
+        poster: document.getElementById('current-poster').src,
+        title: document.getElementById('current-title').innerText,
+        singer: document.getElementById('current-singer').innerText,
+        currentTime: document.getElementById('audio-player').currentTime,
+        isPlaying: !document.getElementById('audio-player').paused
+      };
+      localStorage.setItem('currentSong', JSON.stringify(currentSong));
+    }
+
+    document.addEventListener('DOMContentLoaded', renderPlaylist);
+
+    // Add the following code for continuous play
+    let currentSongIndex = 0;
+    const songs = JSON.parse(localStorage.getItem('savedSongs')) || [];
+
+    function loadSong(index) {
+      const song = songs[index];
+      const audioPlayer = document.getElementById('audio-player');
+      document.getElementById('current-title').innerText = song.title;
+      document.getElementById('current-poster').src = song.poster;
+      document.getElementById('current-singer').innerText = song.singer;
+      audioPlayer.src = song.audio;
+      audioPlayer.play();
+      updateActiveSong();
+      audioPlayer.addEventListener('ended', playNextSong);
+    }
+
+    function playNextSong() {
+      currentSongIndex = (currentSongIndex + 1) % songs.length;
+      loadSong(currentSongIndex);
+    }
+
+    function updateActiveSong() {
+      const songItems = document.querySelectorAll('.song-item');
+      songItems.forEach((item, index) => {
+        if (index === currentSongIndex) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+
+    document.getElementById('prev-button').addEventListener('click', () => {
+      currentSongIndex = (currentSongIndex > 0) ? currentSongIndex - 1 : songs.length - 1;
+      loadSong(currentSongIndex);
+    });
+
+    document.getElementById('next-button').addEventListener('click', () => {
+      currentSongIndex = (currentSongIndex + 1) % songs.length;
+      loadSong(currentSongIndex);
+    });
+
+    window.addEventListener('load', () => {
+      const currentSong = JSON.parse(localStorage.getItem('currentSong'));
+      if (currentSong) {
+        currentSongIndex = songs.findIndex(song => song.audio === currentSong.audio);
+        if (currentSongIndex === -1) currentSongIndex = 0;
+        loadSong(currentSongIndex);
+      } else if (songs.length > 0) {
+        loadSong(currentSongIndex);
+      }
+    });
+  </script>
+  
+  <script src="./script.js"></script>
+</body>
+</html>

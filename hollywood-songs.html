@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/3bd6c4a176.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./screen-size.css">
+  <title>Music Player</title>
+ <style>
+   .right {
+     margin-bottom: 10px;
+   }
+  .popular-song .song-list {
+  display: grid;
+   grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+   grid-gap: 10px;
+   margin-top: 30px;
+  }
+ </style>
+  
+</head>
+<body>
+  
+  <nav>
+    <div class="nav-bar">
+      <span>
+        <h1> Music World</h1>
+      </span>
+      <div class="search-bar">
+        <form action="#" method="get" class="search-form">
+          <input type="text" placeholder="Search..." name="search" class="search-input">
+          <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
+        </form>
+      </div>
+    </div>
+  </nav> 
+
+  <div class="toggle-menu">
+    <button id="toggle-menu-btn"><i class="fa-solid fa-bars"></i></button>
+  </div>
+
+  <div class="container">
+    <div class="left">
+  <button id="close-left-sidebar" >
+    <i class="fas fa-times"></i> <!-- Font Awesome delete icon -->
+  </button>
+      <div class="btn">
+        <ul>
+          <li><i class="fa-solid fa-house"></i><a href="./index.html" id="home-button">Home</a></li>
+          <li><i class="fa-solid fa-plus"></i><a href="./playlist.html">PlayList</a></li>
+        </ul>
+      </div>
+      <div class="artists" id="now-playing">
+        <div class="song-details" id="musicPlayer">
+          <h2 id="current-title">Song Title</h2>
+          <img id="current-poster" src="" alt="Song Poster"><br>
+         <span>Singer </span><p id="current-singer"> Artist Name</p>
+          <audio id="audio-player" controls></audio>
+          <div class="controls">
+            <button id="prev-button"><i class="fa-solid fa-angle-left"></i></button>
+            <button id="play-pause-button" hidden><i class="fa-solid fa-play"></i></button>
+            <button id="next-button"><i class="fa-solid fa-angle-right" ></i></button>
+            <button type="button" id="download-button" onclick="sendDataToPlaylist()"><i class="fa-solid fa-download"></i></button>
+          </div>
+          <input type="range" id="progress-bar" value="0" max="100" hidden>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      
+      
+      <div class="popular-song hollywoodSongs">
+        <div class="title">
+          <h1>Hollywood Songs</h1>
+        </div>
+        <div class="song-list songs">
+          <div class="song-item" data-singer="Mark Ronson" data-audio="./hollywood-audio/uptown-funk.mp3" data-poster="./hollywood-songs/uptown-funk.jpg" data-title="Uptown-Funk">
+            <img src="./hollywood-songs/uptown-funk.jpg" alt="song1">
+            <h2>uptown-funk</h2>
+          </div>
+          <div class="song-item" data-singer="Benson Boone" data-audio="./hollywood-audio/beautiful-things.mp3" data-poster="./hollywood-songs/beautiful-things.jpg" data-title="Beautiful Things">
+            <img src="./hollywood-songs/beautiful-things.jpg" alt="song 1">
+            <h2>Beautiful Things</h2>
+          </div>
+          <div class="song-item" data-singer="Kony Ala" data-audio="./hollywood-audio/blue-one-love.mp3" data-poster="./hollywood-songs/blue-one-love.jpg" data-title="Blue One love">
+            <img src="./hollywood-songs/blue-one-love.jpg" alt="song 2">
+            <h2>Blue One love</h2>
+          </div>
+          <div class="song-item" data-singer="Pitbull" data-audio="./hollywood-audio/fireball.mp3" data-poster="./hollywood-songs/fireball.jpg" data-title="fireball">
+            <img src="./hollywood-songs/fireball.jpg" alt="song 3">
+            <h2>fireball</h2>
+          </div>
+          <div class="song-item" data-singer="Rom Di Prisco" data-audio="./hollywood-audio/fortnite.mp3" data-poster="./hollywood-songs/fortnight.jpg" data-title="Fortnight">
+                    <img src="./hollywood-songs/fortnight.jpg" alt="song 3">
+                    <h2>Fortnite</h2>
+                  </div>
+                  <div class="song-item" data-singer="Artemas" data-audio="./hollywood-audio/i-like-the-way-you-kiss-me.mp3" data-poster="./hollywood-songs/i-like-the-way-you-kiss-me.jpg" data-title="I Like The Way You Kiss Me">
+                    <img src="./hollywood-songs/i-like-the-way-you-kiss-me.jpg" alt="song 3">
+                    <h2>I Like The Way You Kiss Me</h2>
+                  </div>
+                  <div class="song-item" data-singer="Camila Cabello" data-audio="./hollywood-audio/i-luv-it.mp3" data-poster="./hollywood-songs/i-luv-it.jpg" data-title="I Luv It">
+                    <img src="./hollywood-songs/i-luv-it.jpg" alt="song 3">
+                    <h2>I Luv It</h2>
+                  </div>
+                  <div class="song-item" data-singer="Justin Bieber" data-audio="./hollywood-audio/love-me.mp3" data-poster="./hollywood-songs/love-me.jpg" data-title="love Me">
+                    <img src="./hollywood-songs/love-me.jpg" alt="song 3">
+                    <h2>love Me</h2>
+                  </div>
+                  <div class="song-item" data-singer="Ed Sheeran" data-audio="./hollywood-audio/perfect.mp3" data-poster="./hollywood-songs/perfect.jpg" data-title="Perfect">
+                    <img src="./hollywood-songs/perfect.jpg" alt="song 3">
+                    <h2>Perfect</h2>
+                  </div>
+                  <div class="song-item" data-singer="FKJ & Masego" data-audio="./hollywood-audio/tadow.mp3" data-poster="./hollywood-songs/tadow.jpg" data-title="Tadow">
+                    <img src="./hollywood-songs/tadow.jpg" alt="song 3">
+                    <h2>Tadow</h2>
+                  </div>
+                  
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+
+  
+ 
+  
+ 
+<script src="./script.js"></script>
+
+ 
+
+</body>
+</html>

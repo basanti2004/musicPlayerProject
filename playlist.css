@@ -1,0 +1,51 @@
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+                                   
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f09001;
+ }
+
+ .right .song-item {
+   display: flex;
+   flex-direction: row;
+   background-color: transparent;
+   border-radius: 10px;
+   padding: 1rem;
+   width: 222%;
+ }
+ .song-item:hover {
+  transition: 0.3s ease;
+  padding: 10px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+ 
+ .right .bolly-songs h1 {
+  padding-bottom: 2rem;
+ }
+ .right .song-item img {
+    border-radius: 4px;
+    width: 3rem;
+    height: 3rem;
+}
+.right .song-item h2 {
+   font-size: 25px;
+   padding: 5px 2rem 0px 2rem;
+   color: white;
+}
+.song-item .delete-button {
+  position: absolute;
+  left: 43rem;
+  background-color: transparent;
+  color: white;
+  font-size: 25px;
+  border: none;
+ padding-top: 0.7rem;
+}
+.song-item .delete-button:hover {
+  color: black;
+}
+
